@@ -21,7 +21,7 @@ def getValFromByte(b):
     return int(b[2:-5])
     
 print(ArduinoSerial.readline())
-xoffset = getValFromByte(str(ArduinoSerial.readline()))
+xoffset = getValFromByte(str(ArduinoSerial.readline())) 
 yoffset = getValFromByte(str(ArduinoSerial.readline()))
 
 def mathifyEq(eq):
