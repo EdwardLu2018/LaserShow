@@ -9,7 +9,7 @@ int ypos = 0;    // variable to store the y servo position
 int xoffset = 85;  // variable stores x servo offset position
 int yoffset = 100;  // variable stores y servo offset position
 
-int arr[] = {};
+//int arr[] = {};
 
 int x;
 int y;
@@ -27,12 +27,7 @@ void setup() {
 
 void loop() {
   while (Serial.available()) {
-    x = Serial.parseInt();
-    xservo.write(x);
-    delay(100);
-    y = Serial.parseInt();
-    yservo.write(y);
+    x = Serial.read();
     Serial.println(x);
-    Serial.println(y);
   }
 }
