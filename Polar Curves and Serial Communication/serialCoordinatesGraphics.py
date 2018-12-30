@@ -1,13 +1,17 @@
 from tkinter import *
 import time
 import serial
+import struct
 
 ################################################################################
 
 def init(data):
     data.points = []
-    data.rows = data.cols = 10
+    data.rows = data.cols = 22
+    data.half = data.rows//2
     data.cellSize = data.width//data.rows
+    data.lastKey = ""
+    data.removedPts = []
 
 def mousePressed(event, data):
     x = event.x/data.cellSize
@@ -15,17 +19,53 @@ def mousePressed(event, data):
     for r in range(data.rows):
         for c in range(data.cols):
             if isClose(x, c) and isClose(y, r):
-                data.points += [[round(x), round(y)]]
+                data.removedPts = []
+                data.points += [[round(x)-data.half, data.half-round(y)]]
+    removeUnneedPts(data)
+
+def removeUnneedPts(data):
+    if len(data.points) >= 3:
+        for i in range(len(data.points)-2):
+            x0 = data.points[i][0]
+            y0 = data.points[i][1]
+            x1 = data.points[i+1][0]
+            y1 = data.points[i+1][1]
+            x2 = data.points[i+2][0]
+            y2 = data.points[i+2][1]
+            if (y0 == y1 == y2 and x0 < x1 < x2 or x0 > x1 > x2) or \
+               (x0 == x1 == x2 and y0 < y1 < y2 or y0 > y1 > y2):
+                data.points.remove(data.points[i+1])
+    print(data.points)
 
 def isClose(pt1, pt2):
-    return abs(pt1 - pt2) <= .1
+    return abs(pt1 - pt2) <= .15
 
 def keyPressed(event, data):
-    # use event.char and event.keysym
-    pass
+    if data.lastKey == "??" and event.keysym == "z":
+        if len(data.points) > 0:
+            data.removedPts += [data.points.pop()]
+    elif data.lastKey == "??" and event.keysym == "u":
+        if len(data.removedPts) > 0:
+            data.points += [data.removedPts.pop()]
+    elif data.lastKey == "??" and event.keysym == "s":
+        print("sending")
+        sendDataPoints(data)
+    else:
+        data.lastKey = event.keysym
 
-def timerFired(data):
-    pass
+def sendDataPoints(data):
+    try:
+        ArduinoSerial = serial.Serial('/dev/cu.usbmodem1421', 9600)
+        time.sleep(2)
+        print("Serial communication established!")
+        print("Sending inputs to Arduino")
+        while True:
+            for pt in data.points:
+                print("...")
+                ArduinoSerial.write(struct.pack(">BB", pt[0], pt[1]))
+                time.sleep(1)
+    except:
+        print("Could not find connection to Arduino. Please try again.")
 
 def redrawAll(canvas, data):
     for r in range(data.rows):
@@ -34,28 +74,28 @@ def redrawAll(canvas, data):
             right = r*data.cellSize
             canvas.create_rectangle((left, right), 
                                     (left+data.cellSize, right+data.cellSize))
-    canvas.create_line((5*data.cellSize, 0), 
-                       (5*data.cellSize, data.height), 
+    canvas.create_line((data.half*data.cellSize, 0), 
+                       (data.half*data.cellSize, data.height), 
                        width=3)
-    canvas.create_line((0, 5*data.cellSize), 
-                       (data.width, 5*data.cellSize),
+    canvas.create_line((0, data.half*data.cellSize), 
+                       (data.width, data.half*data.cellSize),
                        width=3)
 
     for pt in data.points:
         radius = 3
-        canvas.create_oval((pt[0]*data.cellSize-radius, 
-                            pt[1]*data.cellSize-radius), 
-                           (pt[0]*data.cellSize+radius, 
-                            pt[1]*data.cellSize+radius),
+        canvas.create_oval(((pt[0]+data.half)*data.cellSize-radius, 
+                            -(pt[1]-data.half)*data.cellSize-radius), 
+                           ((pt[0]+data.half)*data.cellSize+radius, 
+                            -(pt[1]-data.half)*data.cellSize+radius),
                            fill="black")
 
     for i in range(len(data.points)-1):
         firstPt = data.points[i]
         secondPt = data.points[i+1]
-        canvas.create_line((firstPt[0]*data.cellSize, 
-                            firstPt[1]*data.cellSize), 
-                           (secondPt[0]*data.cellSize, 
-                            secondPt[1]*data.cellSize), 
+        canvas.create_line(((firstPt[0]+data.half)*data.cellSize, 
+                            -(firstPt[1]-data.half)*data.cellSize), 
+                           ((secondPt[0]+data.half)*data.cellSize, 
+                            -(secondPt[1]-data.half)*data.cellSize), 
                            width=3, fill="green yellow")
 
 ################################################################################
@@ -75,10 +115,6 @@ def run(width=300, height=300):
     def keyPressedWrapper(event, canvas, data):
         keyPressed(event, data)
         redrawAllWrapper(canvas, data)
-
-    # ArduinoSerial = serial.Serial('/dev/cu.usbmodem1421', 9600)
-    # time.sleep(2)
-    # print("Serial communication established")
 
     # Set up data and call init
     class Struct(object): pass
