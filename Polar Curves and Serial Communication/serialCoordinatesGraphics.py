@@ -54,7 +54,6 @@ def keyPressed(event, data):
         if len(data.removedPts) > 0:
             data.points += [data.removedPts.pop()]
     elif data.lastKey == "??" and event.keysym == "s":
-        print("sending")
         sendDataPoints(data)
     else:
         data.lastKey = event.keysym
