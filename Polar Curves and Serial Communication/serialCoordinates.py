@@ -1,12 +1,9 @@
 import time
-import struct
 import serial
 
 ArduinoSerial = serial.Serial('/dev/cu.usbmodem1421', 9600)
 time.sleep(2)
 print("Serial communication established")
-
-# print(ArduinoSerial.readline().decode())
 
 def getDataPoints(numPts):
     inputs = []
