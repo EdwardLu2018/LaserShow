@@ -18,12 +18,17 @@ def mousePressed(event, data):
     y = event.y/data.cellSize
     for r in range(data.rows):
         for c in range(data.cols):
-            if isClose(x, c) and isClose(y, r):
-                data.removedPts = []
-                data.points += [[round(x)-data.half, data.half-round(y)]]
+            if isClose(x, c) and isClose(y, r) and \
+               round(x)-data.half != data.half and \
+               data.half-round(y) != data.half:
+                    data.removedPts = []
+                    data.points += [[round(x)-data.half, data.half-round(y)]]
     removeUnneedPts(data)
 
 def removeUnneedPts(data):
+    if len(data.points) >= 2:
+        if data.points[-1] == data.points[-2]:
+            data.points.pop()
     if len(data.points) >= 3:
         for i in range(len(data.points)-2):
             x0 = data.points[i][0]
@@ -32,13 +37,14 @@ def removeUnneedPts(data):
             y1 = data.points[i+1][1]
             x2 = data.points[i+2][0]
             y2 = data.points[i+2][1]
-            if (y0 == y1 == y2 and x0 < x1 < x2 or x0 > x1 > x2) or \
-               (x0 == x1 == x2 and y0 < y1 < y2 or y0 > y1 > y2):
+            if (y0 == y1 == y2 and (x0 < x1 < x2 or x0 > x1 > x2)) or \
+               (x0 == x1 == x2 and (y0 < y1 < y2 or y0 > y1 > y2)) or \
+               (y0-y1)//(x0-x1) == (y1-y2)//(x1-x2) == (y0-y2)//(x0-x2):
                 data.points.remove(data.points[i+1])
     print(data.points)
 
 def isClose(pt1, pt2):
-    return abs(pt1 - pt2) <= .15
+    return abs(pt1 - pt2) <= .25
 
 def keyPressed(event, data):
     if data.lastKey == "??" and event.keysym == "z":
@@ -138,4 +144,4 @@ def run(width=300, height=300):
     root.mainloop()  # blocks until window is closed
     print("bye!")
 
-run(500, 500)
+run(600, 600)
