@@ -1,5 +1,3 @@
-int incoming[3];
-
 void setup() {
   Serial.begin(9600);
   
@@ -7,13 +5,13 @@ void setup() {
 }
 
 void loop() {
-  while(Serial.available()){
-    for (int i = 0; i < 3; i++){
-      incoming[i] = Serial.parseInt();
-      delay(1000);
-    }
-  }
-  for (int i = 0; i < 3; i++){
-    Serial.println(incoming[i]);
+  while(Serial.available() > 0){
+    delay(1000);
+    int incomingX = Serial.parseInt();
+    Serial.print(incomingX);
+    Serial.print(" ");
+    delay(1000);
+    int incomingY = Serial.parseInt();
+    Serial.println(incomingY);
   }
 }
