@@ -39,7 +39,8 @@ def removeUnneedPts(data):
             y2 = data.points[i+2][1]
             if (y0 == y1 == y2 and (x0 < x1 < x2 or x0 > x1 > x2)) or \
                (x0 == x1 == x2 and (y0 < y1 < y2 or y0 > y1 > y2)) or \
-               (y0-y1)//(x0-x1) == (y1-y2)//(x1-x2) == (y0-y2)//(x0-x2):
+               (x0-x1 != 0 and x1-x2 != 0 and x0-x2 and \
+               (y0-y1)//(x0-x1) == (y1-y2)//(x1-x2) == (y0-y2)//(x0-x2)):
                 data.points.remove(data.points[i+1])
     print(data.points)
 
@@ -69,6 +70,12 @@ def sendDataPoints(data):
                 print("...")
                 ArduinoSerial.write(struct.pack(">BB", pt[0], pt[1]))
                 time.sleep(1)
+            if len(data.points) >= 2 and data.points[0] != data.points[-1]:
+                for i in range(len(data.points)-1, -1, -1):
+                    pt = data.points[i]
+                    print("...")
+                    ArduinoSerial.write(struct.pack(">BB", pt[0], pt[1]))
+                    time.sleep(1)
     except:
         print("Could not find connection to Arduino. Please try again.")
 
