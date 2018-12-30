@@ -12,6 +12,7 @@ def init(data):
     data.cellSize = data.width//data.rows
     data.lastKey = ""
     data.removedPts = []
+    # data.isSendingData = False
 
 def mousePressed(event, data):
     x = event.x/data.cellSize
