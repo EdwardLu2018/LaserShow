@@ -16,7 +16,7 @@ def init(data):
     data.isSendingData = False
 
 def mousePressed(event, data):
-    if len(data.points) < 2 or data.points[0] != data.points[-1]:
+    if len(data.points) <= 1 or data.points[0] != data.points[-1]:
         x = event.x/data.cellSize
         y = event.y/data.cellSize
         for r in range(data.rows):
@@ -26,7 +26,7 @@ def mousePressed(event, data):
                    data.half-round(y) != data.half:
                         data.removedPts = []
                         data.points += [[round(x)-data.half, data.half-round(y)]]
-        removeUnneedPts(data)
+    removeUnneedPts(data)
 
 def removeUnneedPts(data):
     if len(data.points) >= 2:
@@ -42,7 +42,8 @@ def removeUnneedPts(data):
         if (y0 == y1 == y2 and (x0 < x1 < x2 or x0 > x1 > x2)) or \
            (x0 == x1 == x2 and (y0 < y1 < y2 or y0 > y1 > y2)) or \
            (x0-x1 != 0 and x1-x2 != 0 and x0-x2 != 0 and \
-           (y0-y1)/(x0-x1) == (y1-y2)/(x1-x2) == (y0-y2)/(x0-x2)):
+            y0-y1 != 0 and y1-y2 != 0 and y0-y2 != 0 and \
+           (y0-y1)/(x0-x1) == (y1-y2)/(x1-x2) == (y0-y2)/(x0-x2) ):
             data.points.remove(data.points[-2])
 
 def isClose(pt1, pt2):
@@ -55,22 +56,22 @@ def keyPressed(event, data):
     elif event.keysym == "y":
         if len(data.removedPts) > 0:
             data.points += [data.removedPts.pop()]
+    elif event.keysym == "x":
+        data.points = []
     elif event.keysym == "u":
         sendDataPoints(data)
 
-    if len(data.points) < 2 or data.points[0] != data.points[-1]:
+    if 0 < len(data.points) <= 1 or \
+       (len(data.points) >= 2 and data.points[0] != data.points[-1]):
         if data.points[-1][0] > -10 and event.keysym == "Left":
             data.points += [[data.points[-1][0]-1, data.points[-1][1]]]
-            removeUnneedPts(data)
         elif data.points[-1][0] < 10 and event.keysym == "Right":
             data.points += [[data.points[-1][0]+1, data.points[-1][1]]]
-            removeUnneedPts(data)
         elif data.points[-1][1] < 10 and event.keysym == "Up":
             data.points += [[data.points[-1][0], data.points[-1][1]+1]]
-            removeUnneedPts(data)
         elif data.points[-1][1] > -10 and event.keysym == "Down":
             data.points += [[data.points[-1][0], data.points[-1][1]-1]]
-            removeUnneedPts(data)
+    removeUnneedPts(data)
 
 def sendDataPoints(data):
     if len(data.points) > 0:
