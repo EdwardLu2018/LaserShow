@@ -10,7 +10,6 @@ def init(data):
     data.rows = data.cols = 22
     data.half = data.rows//2
     data.cellSize = data.width//data.rows
-    data.lastKey = ""
     data.removedPts = []
     data.port = "/dev/cu.usbmodem1421"
     data.baudRate = 9600
@@ -49,6 +48,15 @@ def isClose(pt1, pt2):
     return abs(pt1 - pt2) <= .25
 
 def keyPressed(event, data):
+    if event.keysym == "z":
+        if len(data.points) > 0:
+            data.removedPts += [data.points.pop()]
+    elif event.keysym == "y":
+        if len(data.removedPts) > 0:
+            data.points += [data.removedPts.pop()]
+    elif event.keysym == "u":
+        sendDataPoints(data)
+
     if len(data.points) > 0:
         if data.points[-1][0] > -10 and event.keysym == "Left":
             data.points += [[data.points[-1][0]-1, data.points[-1][1]]]
@@ -62,17 +70,6 @@ def keyPressed(event, data):
         elif data.points[-1][1] > -10 and event.keysym == "Down":
             data.points += [[data.points[-1][0], data.points[-1][1]-1]]
             removeUnneedPts(data)
-
-    if data.lastKey == "??" and event.keysym == "z":
-        if len(data.points) > 0:
-            data.removedPts += [data.points.pop()]
-    elif data.lastKey == "??" and event.keysym == "y":
-        if len(data.removedPts) > 0:
-            data.points += [data.removedPts.pop()]
-    elif data.lastKey == "??" and event.keysym == "u":
-        sendDataPoints(data)
-    else:
-        data.lastKey = event.keysym
 
 def sendDataPoints(data):
     if len(data.points) > 0:
