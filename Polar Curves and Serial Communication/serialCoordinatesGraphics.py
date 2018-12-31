@@ -13,6 +13,7 @@ def init(data):
     data.lastKey = ""
     data.removedPts = []
     data.port = "/dev/cu.usbmodem1421"
+    data.baudRate = 9600
     data.isSendingData = False
 
 def mousePressed(event, data):
@@ -76,7 +77,7 @@ def keyPressed(event, data):
 def sendDataPoints(data):
     if len(data.points) > 0:
         try:
-            ArduinoSerial = serial.Serial(data.port, 9600)
+            ArduinoSerial = serial.Serial(data.port, data.baudRate)
             time.sleep(2)
             print("Serial communication established!")
             print("Sending inputs to Arduino.")
