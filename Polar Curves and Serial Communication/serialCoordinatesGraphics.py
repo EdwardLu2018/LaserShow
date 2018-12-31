@@ -53,10 +53,10 @@ def keyPressed(event, data):
     if data.lastKey == "??" and event.keysym == "z":
         if len(data.points) > 0:
             data.removedPts += [data.points.pop()]
-    elif data.lastKey == "??" and event.keysym == "u":
+    elif data.lastKey == "??" and event.keysym == "y":
         if len(data.removedPts) > 0:
             data.points += [data.removedPts.pop()]
-    elif data.lastKey == "??" and event.keysym == "s":
+    elif data.lastKey == "??" and event.keysym == "u":
         sendDataPoints(data)
     else:
         data.lastKey = event.keysym
@@ -149,6 +149,8 @@ def run(width=300, height=300):
                             mousePressedWrapper(event, canvas, data))
     root.bind("<Key>", lambda event:
                             keyPressedWrapper(event, canvas, data))
+    root.bind("<B1-Motion>", lambda event:
+                            mousePressedWrapper(event, canvas, data))
     redrawAll(canvas, data)
     # and launch the app
     root.mainloop()  # blocks until window is closed
