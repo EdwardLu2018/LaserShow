@@ -12,6 +12,7 @@ def init(data):
     data.cellSize = data.width//data.rows
     data.lastKey = ""
     data.removedPts = []
+    data.port = "/dev/cu.usbmodem1421"
     # data.isSendingData = False
 
 def mousePressed(event, data):
@@ -62,7 +63,7 @@ def keyPressed(event, data):
 
 def sendDataPoints(data):
     try:
-        ArduinoSerial = serial.Serial("/dev/cu.usbmodem1421", 9600)
+        ArduinoSerial = serial.Serial(data.port, 9600)
         time.sleep(2)
         print("Serial communication established!")
         print("Sending inputs to Arduino.")
