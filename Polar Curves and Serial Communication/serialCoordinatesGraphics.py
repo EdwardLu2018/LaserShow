@@ -62,7 +62,7 @@ def keyPressed(event, data):
 
 def sendDataPoints(data):
     try:
-        ArduinoSerial = serial.Serial('/dev/cu.usbmodem1421', 9600)
+        ArduinoSerial = serial.Serial("/dev/cu.usbmodem1421", 9600)
         time.sleep(2)
         print("Serial communication established!")
         print("Sending inputs to Arduino.")
