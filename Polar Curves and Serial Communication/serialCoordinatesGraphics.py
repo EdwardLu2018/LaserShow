@@ -152,13 +152,14 @@ def run(width=300, height=300):
     data = Struct()
     data.width = width
     data.height = height
+    # create the root
     root = Tk()
     root.resizable(width=False, height=False) # prevents resizing window
     init(data)
-    # create title
+    # create the title
     title = Label(root, text="Laser Show!", font="Times 20 bold")
     title.pack(side=TOP, fill=BOTH, expand=YES)
-    # create the root and the canvas
+    # create the canvas
     canvas = Canvas(root, width=data.width, height=data.height)
     canvas.configure(bd=0, highlightthickness=0)
     canvas.pack(side=TOP, padx=(8,5), pady=(0,5))
