@@ -61,25 +61,26 @@ def keyPressed(event, data):
         data.lastKey = event.keysym
 
 def sendDataPoints(data):
-    ArduinoSerial = serial.Serial('/dev/cu.usbmodem1421', 9600)
-    time.sleep(2)
-    print("Serial communication established!")
-    print("Sending inputs to Arduino.")
-    while True:
-        for pt in data.points:
-            print("...")
-            ArduinoSerial.write(struct.pack(">BB", pt[0]+data.half, 
-                                                   pt[1]+data.half))
-            time.sleep(1)
-        if len(data.points) >= 2 and data.points[0] != data.points[-1]:
-            for i in range(len(data.points)-1, -1, -1):
-                pt = data.points[i]
+    try:
+        ArduinoSerial = serial.Serial('/dev/cu.usbmodem1421', 9600)
+        time.sleep(2)
+        print("Serial communication established!")
+        print("Sending inputs to Arduino.")
+        while True:
+            for pt in data.points:
                 print("...")
                 ArduinoSerial.write(struct.pack(">BB", pt[0]+data.half, 
                                                        pt[1]+data.half))
                 time.sleep(1)
-    # except:
-    #     print("Could not find connection to Arduino. Please try again.")
+            if len(data.points) >= 2 and data.points[0] != data.points[-1]:
+                for i in range(len(data.points)-1, -1, -1):
+                    pt = data.points[i]
+                    print("...")
+                    ArduinoSerial.write(struct.pack(">BB", pt[0]+data.half, 
+                                                           pt[1]+data.half))
+                    time.sleep(1)
+    except:
+        print("Could not find connection to Arduino. Please try again.")
 
 def redrawAll(canvas, data):
     for r in range(data.rows):
