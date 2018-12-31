@@ -88,7 +88,7 @@ def sendDataPoints(data):
                                                            pt[1]+data.half))
                     time.sleep(1)
                 if len(data.points) >= 2 and data.points[0] != data.points[-1]:
-                    for i in range(len(data.points)-1, -1, -1):
+                    for i in range(len(data.points)-2, 0, -1):
                         pt = data.points[i]
                         print("...")
                         ArduinoSerial.write(struct.pack(">BB", pt[0]+data.half, 
