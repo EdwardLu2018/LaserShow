@@ -41,8 +41,8 @@ def removeUnneedPts(data):
             y2 = data.points[i+2][1]
             if (y0 == y1 == y2 and (x0 < x1 < x2 or x0 > x1 > x2)) or \
                (x0 == x1 == x2 and (y0 < y1 < y2 or y0 > y1 > y2)) or \
-               (x0-x1 != 0 and x1-x2 != 0 and x0-x2 and \
-               (y0-y1)//(x0-x1) == (y1-y2)//(x1-x2) == (y0-y2)//(x0-x2)):
+               (x0-x1 != 0 and x1-x2 != 0 and x0-x2 != 0 and \
+               (y0-y1)/(x0-x1) == (y1-y2)/(x1-x2) == (y0-y2)/(x0-x2)):
                 data.points.remove(data.points[i+1])
 
 def isClose(pt1, pt2):
@@ -121,7 +121,7 @@ def run(width=300, height=300):
         canvas.create_rectangle(0, 0, data.width, data.height,
                                 fill='white', width=0)
         redrawAll(canvas, data)
-        canvas.update()    
+        canvas.update()
 
     def mousePressedWrapper(event, canvas, data):
         mousePressed(event, data)
@@ -148,8 +148,6 @@ def run(width=300, height=300):
                             mousePressedWrapper(event, canvas, data))
     root.bind("<Key>", lambda event:
                             keyPressedWrapper(event, canvas, data))
-    root.bind("<B1-Motion>", lambda event:
-                            mousePressedWrapper(event, canvas, data))
     redrawAll(canvas, data)
     # and launch the app
     root.mainloop()  # blocks until window is closed
