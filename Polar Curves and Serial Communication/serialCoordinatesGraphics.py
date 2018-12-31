@@ -80,9 +80,10 @@ def sendDataPoints(data):
             ArduinoSerial = serial.Serial(data.port, data.baudRate)
             time.sleep(2)
             print("Serial communication established!")
-            print("Sending inputs to Arduino...")
+            print("Sending inputs to Arduino")
             while True:
-                for pt in data.points:
+                for i in range(len(data.points)-1):
+                    pt = data.points[i]
                     print("...")
                     ArduinoSerial.write(struct.pack(">BB", pt[0]+data.half, 
                                                            pt[1]+data.half))
