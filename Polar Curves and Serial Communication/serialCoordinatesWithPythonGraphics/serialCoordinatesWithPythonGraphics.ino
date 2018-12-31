@@ -10,12 +10,12 @@ void loop() {
   while(Serial.available() >= 2) {
     for(int i = 0; i < 2; i++) {
       if(i == 0) {
-        incomingPts[i] = Serial.read();
+        incomingPts[i] = Serial.read() - 11;
         Serial.print(incomingPts[i]);
         Serial.print(", ");
       }
       else {
-        incomingPts[i] = Serial.read();
+        incomingPts[i] = Serial.read() - 11;
         Serial.println(incomingPts[i]);
       }
     }
