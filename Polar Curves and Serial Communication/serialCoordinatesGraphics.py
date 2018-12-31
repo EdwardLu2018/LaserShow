@@ -25,7 +25,8 @@ def mousePressed(event, data):
                    round(x)-data.half != data.half and \
                    data.half-round(y) != data.half:
                         data.removedPts = []
-                        data.points += [[round(x)-data.half, data.half-round(y)]]
+                        data.points += [[round(x)-data.half, 
+                                         data.half-round(y)]]
     removeUnneedPts(data)
 
 def removeUnneedPts(data):
@@ -79,7 +80,7 @@ def sendDataPoints(data):
             ArduinoSerial = serial.Serial(data.port, data.baudRate)
             time.sleep(2)
             print("Serial communication established!")
-            print("Sending inputs to Arduino.")
+            print("Sending inputs to Arduino...")
             while True:
                 for pt in data.points:
                     print("...")
