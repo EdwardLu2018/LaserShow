@@ -153,6 +153,7 @@ def run(width=300, height=300):
     root = Tk()
     root.resizable(width=False, height=False) # prevents resizing window
     init(data)
+    # create title
     title = Label(root, text="Laser Show!", font="Times 20 bold")
     title.pack(side=TOP, fill=BOTH, expand=YES)
     # create the root and the canvas
