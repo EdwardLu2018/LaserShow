@@ -44,7 +44,6 @@ def removeUnneedPts(data):
                (x0-x1 != 0 and x1-x2 != 0 and x0-x2 and \
                (y0-y1)//(x0-x1) == (y1-y2)//(x1-x2) == (y0-y2)//(x0-x2)):
                 data.points.remove(data.points[i+1])
-    print(data.points)
 
 def isClose(pt1, pt2):
     return abs(pt1 - pt2) <= .25
