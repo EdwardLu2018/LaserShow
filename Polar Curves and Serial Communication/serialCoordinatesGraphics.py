@@ -1,4 +1,4 @@
-import tkinter as tk
+from tkinter import *
 import time
 import serial
 import struct
@@ -94,10 +94,10 @@ def redrawAll(canvas, data):
                                     (left+data.cellSize, right+data.cellSize))
     canvas.create_line((data.half*data.cellSize, 0), 
                        (data.half*data.cellSize, data.height), 
-                       width=3, arrow=tk.BOTH)
+                       width=3, arrow=BOTH)
     canvas.create_line((0, data.half*data.cellSize), 
                        (data.width, data.half*data.cellSize),
-                       width=3, arrow=tk.BOTH)
+                       width=3, arrow=BOTH)
 
     for pt in data.points:
         radius = 3
@@ -114,13 +114,13 @@ def redrawAll(canvas, data):
                             -(firstPt[1]-data.half)*data.cellSize), 
                            ((secondPt[0]+data.half)*data.cellSize, 
                             -(secondPt[1]-data.half)*data.cellSize), 
-                           width=3, fill="green yellow", arrow=tk.LAST)
+                           width=3, fill="green yellow", arrow=LAST)
 
 ################################################################################
 
 def run(width=300, height=300):
     def redrawAllWrapper(canvas, data):
-        canvas.delete(tk.ALL)
+        canvas.delete(ALL)
         canvas.create_rectangle(0, 0, data.width, data.height,
                                 fill='white', width=0)
         redrawAll(canvas, data)
@@ -139,11 +139,11 @@ def run(width=300, height=300):
     data = Struct()
     data.width = width
     data.height = height
-    root = tk.Tk()
+    root = Tk()
     root.resizable(width=False, height=False) # prevents resizing window
     init(data)
     # create the root and the canvas
-    canvas = tk.Canvas(root, width=data.width, height=data.height)
+    canvas = Canvas(root, width=data.width, height=data.height)
     canvas.configure(bd=0, highlightthickness=0)
     canvas.pack()
     # set up events
