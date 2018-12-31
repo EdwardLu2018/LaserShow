@@ -16,16 +16,17 @@ def init(data):
     data.isSendingData = False
 
 def mousePressed(event, data):
-    x = event.x/data.cellSize
-    y = event.y/data.cellSize
-    for r in range(data.rows):
-        for c in range(data.cols):
-            if isClose(x, c) and isClose(y, r) and \
-               round(x)-data.half != data.half and \
-               data.half-round(y) != data.half:
-                    data.removedPts = []
-                    data.points += [[round(x)-data.half, data.half-round(y)]]
-    removeUnneedPts(data)
+    if len(data.points) < 2 or data.points[0] != data.points[-1]:
+        x = event.x/data.cellSize
+        y = event.y/data.cellSize
+        for r in range(data.rows):
+            for c in range(data.cols):
+                if isClose(x, c) and isClose(y, r) and \
+                   round(x)-data.half != data.half and \
+                   data.half-round(y) != data.half:
+                        data.removedPts = []
+                        data.points += [[round(x)-data.half, data.half-round(y)]]
+        removeUnneedPts(data)
 
 def removeUnneedPts(data):
     if len(data.points) >= 2:
@@ -57,7 +58,7 @@ def keyPressed(event, data):
     elif event.keysym == "u":
         sendDataPoints(data)
 
-    if len(data.points) > 0:
+    if len(data.points) < 2 or data.points[0] != data.points[-1]:
         if data.points[-1][0] > -10 and event.keysym == "Left":
             data.points += [[data.points[-1][0]-1, data.points[-1][1]]]
             removeUnneedPts(data)
