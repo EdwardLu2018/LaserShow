@@ -32,23 +32,36 @@ def removeUnneedPts(data):
         if data.points[-1] == data.points[-2]:
             data.points.pop()
     if len(data.points) >= 3:
-        for i in range(len(data.points)-2):
-            x0 = data.points[i][0]
-            y0 = data.points[i][1]
-            x1 = data.points[i+1][0]
-            y1 = data.points[i+1][1]
-            x2 = data.points[i+2][0]
-            y2 = data.points[i+2][1]
-            if (y0 == y1 == y2 and (x0 < x1 < x2 or x0 > x1 > x2)) or \
-               (x0 == x1 == x2 and (y0 < y1 < y2 or y0 > y1 > y2)) or \
-               (x0-x1 != 0 and x1-x2 != 0 and x0-x2 != 0 and \
-               (y0-y1)/(x0-x1) == (y1-y2)/(x1-x2) == (y0-y2)/(x0-x2)):
-                data.points.remove(data.points[i+1])
+        x0 = data.points[-1][0]
+        y0 = data.points[-1][1]
+        x1 = data.points[-2][0]
+        y1 = data.points[-2][1]
+        x2 = data.points[-3][0]
+        y2 = data.points[-3][1]
+        if (y0 == y1 == y2 and (x0 < x1 < x2 or x0 > x1 > x2)) or \
+           (x0 == x1 == x2 and (y0 < y1 < y2 or y0 > y1 > y2)) or \
+           (x0-x1 != 0 and x1-x2 != 0 and x0-x2 != 0 and \
+           (y0-y1)/(x0-x1) == (y1-y2)/(x1-x2) == (y0-y2)/(x0-x2)):
+            data.points.remove(data.points[-2])
 
 def isClose(pt1, pt2):
     return abs(pt1 - pt2) <= .25
 
 def keyPressed(event, data):
+    if len(data.points) > 0:
+        if data.points[-1][0] > -10 and event.keysym == "Left":
+            data.points += [[data.points[-1][0]-1, data.points[-1][1]]]
+            removeUnneedPts(data)
+        elif data.points[-1][0] < 10 and event.keysym == "Right":
+            data.points += [[data.points[-1][0]+1, data.points[-1][1]]]
+            removeUnneedPts(data)
+        elif data.points[-1][1] < 10 and event.keysym == "Up":
+            data.points += [[data.points[-1][0], data.points[-1][1]+1]]
+            removeUnneedPts(data)
+        elif data.points[-1][1] > -10 and event.keysym == "Down":
+            data.points += [[data.points[-1][0], data.points[-1][1]-1]]
+            removeUnneedPts(data)
+
     if data.lastKey == "??" and event.keysym == "z":
         if len(data.points) > 0:
             data.removedPts += [data.points.pop()]
@@ -93,10 +106,10 @@ def redrawAll(canvas, data):
             canvas.create_rectangle((left, right), 
                                     (left+data.cellSize, right+data.cellSize))
     canvas.create_line((data.half*data.cellSize, 0), 
-                       (data.half*data.cellSize, data.height), 
+                       (data.half*data.cellSize, data.height-5), 
                        width=3, arrow=BOTH)
     canvas.create_line((0, data.half*data.cellSize), 
-                       (data.width, data.half*data.cellSize),
+                       (data.width-5, data.half*data.cellSize),
                        width=3, arrow=BOTH)
 
     for pt in data.points:
@@ -142,10 +155,12 @@ def run(width=300, height=300):
     root = Tk()
     root.resizable(width=False, height=False) # prevents resizing window
     init(data)
+    title = Label(root, text="Laser Show!", font="Times 20 bold")
+    title.pack(side=TOP, fill=BOTH, expand=YES)
     # create the root and the canvas
     canvas = Canvas(root, width=data.width, height=data.height)
     canvas.configure(bd=0, highlightthickness=0)
-    canvas.pack()
+    canvas.pack(side=TOP, padx=(8,5), pady=(0,5))
     # set up events
     root.bind("<Button-1>", lambda event:
                             mousePressedWrapper(event, canvas, data))
