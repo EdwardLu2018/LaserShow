@@ -11,11 +11,13 @@ void loop() {
     for(int i = 0; i < 2; i++) {
       if(i == 0) {
         incomingPts[i] = Serial.read();
+        Serial.print(incomingPts[i]);
+        Serial.print(", ");
       }
       else {
         incomingPts[i] = Serial.read();
+        Serial.println(incomingPts[i]);
       }
-      Serial.println(incomingPts[i]);
     }
   }
 }

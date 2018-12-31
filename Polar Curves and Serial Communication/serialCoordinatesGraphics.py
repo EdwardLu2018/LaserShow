@@ -65,7 +65,7 @@ def sendDataPoints(data):
         ArduinoSerial = serial.Serial('/dev/cu.usbmodem1421', 9600)
         time.sleep(2)
         print("Serial communication established!")
-        print("Sending inputs to Arduino")
+        print("Sending inputs to Arduino.")
         while True:
             for pt in data.points:
                 print("...")
