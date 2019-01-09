@@ -8,7 +8,10 @@ Currently revived as a passion project. Adding new features
 
 1. Draws user-inputted coordinates unto special light-tracing paper
 2. Draws cyclic curves with amplitudes and wavelengths (in the x and y direction) that can be changed with knobs/potentiometers
-3. Draws polar curves using python serial communication
+
+## To be Implemented
+1. Drawing polar curves
+2. Using python serial communication to get user input
 
 ## Media Coverage
 
