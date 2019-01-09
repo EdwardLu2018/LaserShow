@@ -1,7 +1,6 @@
 # Laser Light Show
 
-Formerly a project with Joe Muskin and Prof. Arend van der Zande at UIUC for engineering outreach
-
+Formerly a project with Joe Muskin and Prof. Arend van der Zande at UIUC for engineering outreach <br>
 Currently revived as a passion project. Adding new features
 
 ## Features
