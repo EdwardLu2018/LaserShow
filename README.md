@@ -2,8 +2,9 @@
 Formerly a project with Joe Muskin and Prof. Arend van der Zande at the University of Illinois at Urbana–Champaign for engineering outreach <br>
 Currently revived as a passion project. Adding new features
 
-## Demo
+## Examples
 ![file not available](videos/infinityDemo.gif)
+![file not available](videos/waveDemoX.gif)
 
 ## Current Features
 1. Draws user-inputted coordinates unto special light-tracing paper
