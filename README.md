@@ -11,7 +11,7 @@ Currently revived as a passion project. Adding new features
 
 ## To be Implemented
 1. Drawing polar curves
-2. Using python serial communication to get user input
+2. Using Python serial communication to get user input
 
 ## Media Coverage
 
