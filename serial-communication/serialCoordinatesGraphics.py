@@ -168,6 +168,8 @@ def run(width=300, height=300):
     # set up events
     root.bind("<Button-1>", lambda event:
                             mousePressedWrapper(event, canvas, data))
+    root.bind("<B1-Motion>", lambda event:
+                            mousePressedWrapper(event, canvas, data))
     root.bind("<Key>", lambda event:
                             keyPressedWrapper(event, canvas, data))
     redrawAll(canvas, data)
