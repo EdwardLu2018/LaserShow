@@ -6,8 +6,6 @@ int incomingPts[2];
 Servo xservo; // xaxis
 Servo yservo; // yaxis
 
-int t = 5;
-
 int x0 = 95;
 int y0 = 92;
 
@@ -39,6 +37,5 @@ void loop () {
     }
     xservo.write(xpos);
     yservo.write(ypos);
-    //delay(t);
   }
 }

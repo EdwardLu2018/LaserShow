@@ -11,10 +11,10 @@ def init(data):
     data.half = data.rows//2
     data.cellSize = data.width//data.rows
     data.removedPts = []
-    data.port = "/dev/cu.usbmodem1411"
+    data.port = "/dev/cu.usbmodem1421"
     data.baudRate = 9600
     data.isSendingData = False
-    data.delay = 0.075; # seconds
+    data.delay = 0.2 # seconds
 
 def mousePressed(event, data):
     if len(data.points) <= 1 or data.points[0] != data.points[-1]:
