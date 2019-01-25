@@ -10,9 +10,9 @@ Changing Wavelength in y-direction:
 
 ![wavelength in y direction](../videos/waveDemoY.gif)
 
-Changing Wavelength in y-direction:
+Changing Wavelength:
 
-![wavelength manipulation](../videos/ampWaveDemoMisc.gif)
+![wavelength manipulation](../videos/waveDemoMisc.gif)
 
 Changing Amplitude in x-direction:
 
