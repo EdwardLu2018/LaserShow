@@ -14,7 +14,7 @@ def init(data):
     data.port = "/dev/cu.usbmodem1411"
     data.baudRate = 9600
     data.isSendingData = False
-    data.delay = 0.003; # seconds
+    data.delay = 0.075; # seconds
 
 def mousePressed(event, data):
     if len(data.points) <= 1 or data.points[0] != data.points[-1]:
