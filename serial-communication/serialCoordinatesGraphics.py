@@ -164,7 +164,7 @@ def run(width=300, height=300):
     # create the canvas
     canvas = Canvas(root, width=data.width, height=data.height)
     canvas.configure(bd=0, highlightthickness=0)
-    canvas.pack(side=TOP, padx=(8,5), pady=(0,5))
+    canvas.pack(side=TOP, padx=5, pady=5)
     # set up events
     root.bind("<Button-1>", lambda event:
                             mousePressedWrapper(event, canvas, data))
