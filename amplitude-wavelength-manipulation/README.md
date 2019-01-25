@@ -2,10 +2,22 @@
 Uses 4 potentiometers to increase/decrease the amplitudes and wavelengths of cyclic curves in both the x and y direction
 
 ## Examples
-Changing Wavelength:
+Changing Wavelength in x-direction:
 
-![example1](../videos/ampWaveDemo1.gif)
+![wavelength in x direction](../videos/waveDemoX.gif)
 
-Changing Amplitude:
+Changing Wavelength in y-direction:
 
-![example2](../videos/ampWaveDemo2.gif)
+![wavelength in y direction](../videos/waveDemoY.gif)
+
+Changing Wavelength in y-direction:
+
+![wavelength manipulation](../videos/ampWaveDemoMisc.gif)
+
+Changing Amplitude in x-direction:
+
+![amplitude in x direction](../videos/ampDemoX.gif)
+
+Changing Amplitude in x-direction:
+
+![amplitude in y direction](../videos/ampDemoY.gif)
