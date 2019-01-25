@@ -5,4 +5,7 @@ Traces coordinates located in a hex file containing an array of points
 ![template](../images/template.png)
 
 ## Example
-![batman demo](../videos/batmanDemo.gif)  ![batman coordinates](../images/batmanCoordinates.png)
+<p float="left">
+  <img src="../videos/batmanDemo.gif" width="100" />
+  <img src="../images/batmanCoordinates.png" width="100" /> 
+</p>
