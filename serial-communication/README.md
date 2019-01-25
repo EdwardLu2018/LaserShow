@@ -4,5 +4,5 @@ Laser Light Show using serial communication with PySerial
 
 ## Examples
 ![leaf demo](../videos/leafDemo.gif)
-[frog demo](../videos/frog.png)
-[frog code](../videos/frogCode.png)
+[frog demo](../images/frog.png)
+[frog code](../images/frogGraphics.png)
