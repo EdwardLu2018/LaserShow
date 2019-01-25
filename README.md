@@ -4,6 +4,7 @@ Currently revived as a passion project. Adding new features
 
 ## Examples
 ![file not available](videos/infinityDemo.gif)
+
 ![file not available](videos/waveDemoX.gif)
 
 ## Current Features
