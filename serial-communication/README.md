@@ -3,4 +3,4 @@ User can input coordinates in a Python application and those coordinates will be
 Laser Light Show using serial communication with PySerial
 
 # Example
-[leaf demo](../videos/leafDemo.gif)
+![leaf demo](../videos/leafDemo.gif)
