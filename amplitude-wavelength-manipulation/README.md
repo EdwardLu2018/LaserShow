@@ -18,6 +18,6 @@ Changing Amplitude in x direction:
 
 ![amplitude in x direction](../videos/ampDemoX.gif)
 
-Changing Amplitude in x direction:
+Changing Amplitude in y direction:
 
 ![amplitude in y direction](../videos/ampDemoY.gif)
