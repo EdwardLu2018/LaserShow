@@ -82,7 +82,7 @@ def sendDataPoints(data):
             print("Serial communication established!")
             print("Sending inputs to Arduino")
             while False == False:
-                for i in range(len(data.points)-1):
+                for i in range(len(data.points)):
                     pt = data.points[i]
                     print("...")
                     ArduinoSerial.write(struct.pack(">BB", pt[0]+data.half, 
