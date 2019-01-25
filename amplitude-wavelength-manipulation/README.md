@@ -2,6 +2,8 @@
 Uses 4 potentiometers to increase/decrease the amplitudes and wavelengths of cyclic curves in both the x and y direction
 
 ## Examples
-![demo](../videos/infinityDemo.gif)
+Changing Wavelength:
 ![example1](../videos/ampWaveDemo1.gif)
+
+Changing Amplitude:
 ![example2](../videos/ampWaveDemo2.gif)
