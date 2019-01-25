@@ -1,4 +1,4 @@
-#define numOfPoints 38
+#define numOfPoints 37
 
 int coordinates[numOfPoints][2] = {
 
@@ -38,6 +38,5 @@ int coordinates[numOfPoints][2] = {
     {-2,4},
     {-1,5},
     {-2,8},
-    {-1,6},
     {-1,6}
 };
