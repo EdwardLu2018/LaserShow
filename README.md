@@ -3,7 +3,7 @@ Formerly a project with Joe Muskin and Prof. Arend van der Zande at the Universi
 Currently revived as a passion project. Adding new features
 
 ## Demo
-![file not available](videos/infinityDemo.mp4)
+![file not available](videos/infinityDemo.gif)
 
 ## Current Features
 1. Draws user-inputted coordinates unto special light-tracing paper
