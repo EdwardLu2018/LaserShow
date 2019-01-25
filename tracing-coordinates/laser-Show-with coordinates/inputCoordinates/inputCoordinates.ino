@@ -1,14 +1,14 @@
 #include <Servo.h>
 #include <math.h>
-#include "origin.h"
+#include "batman.h"
 
 Servo xservo;  // xaxis servo object
 Servo yservo;  // yaxis servo object
  
-int time = 500;
+int time = 75;
 
-int x0 = 85;
-int y0 = 105;
+int x0 = 95;
+int y0 = 92;
 
 int xsign = -1;
 int ysign = -1;

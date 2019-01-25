@@ -13,8 +13,8 @@ int xpos = 0;    // variable to store the x servo position
 int ypos = 0;    // variable to store the y servo position
 int xamplitude;  //variable stores the max sweep of the servo - maximum value is 180
 int yamplitude;  //variable stores the max sweep of the servo - maximum value is 180
-int xoffset = 85;  // variable stores x servo offset position
-int yoffset = 105;  // variable stores y servo offset position
+int xoffset = 95;  // variable stores x servo offset position
+int yoffset = 92;  // variable stores y servo offset position
 int xcenter = 0; //center of travel for the servo
 int ycenter = 0;
 int xwavelength; // number of loops to complete one x cycle
@@ -68,13 +68,14 @@ void loop()
 
   xservo.write(xpos);
   yservo.write(ypos);
+  delay(3);
 
   //Serial.println("xamp:yamp:xwave:ywave");
-  Serial.print(xamplitude);
+  //Serial.print(xamplitude);
   //Serial.print("\t");
-  Serial.print(yamplitude);
+  //Serial.print(yamplitude);
   //Serial.print("\t");
-  Serial.print(xwavelength);
+  //Serial.print(xwavelength);
   //Serial.print("\t");
-  Serial.println(ywavelength);
+  //Serial.println(ywavelength);
 }
