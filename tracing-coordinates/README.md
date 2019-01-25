@@ -7,5 +7,5 @@ Traces coordinates located in a hex (.h) file containing an array of points
 ## Example
 <p float="left">
   <img src="../images/batmanCoordinates.png" width="400" /> 
-  <img src="../videos/batmanDemo.gif" width="480" />
+  <img src="../videos/batmanDemo.gif" width="483" />
 </p>
