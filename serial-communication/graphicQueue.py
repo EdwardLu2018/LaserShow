@@ -82,20 +82,20 @@ def sendDataPoints(data):
             time.sleep(1)
             print("Serial communication established!")
             print("Sending inputs to Arduino")
-            while False == False:
-                for i in range(len(data.points)):
+            for i in range(len(data.points)):
+                pt = data.points[i]
+                print("...")
+                ArduinoSerial.write(struct.pack(">BB", pt[0]+data.half, 
+                                                       pt[1]+data.half))
+                time.sleep(data.delay)
+            if len(data.points) >= 2 and data.points[0] != data.points[-1]:
+                for i in range(len(data.points)-2, 0, -1):
                     pt = data.points[i]
                     print("...")
                     ArduinoSerial.write(struct.pack(">BB", pt[0]+data.half, 
                                                            pt[1]+data.half))
                     time.sleep(data.delay)
-                if len(data.points) >= 2 and data.points[0] != data.points[-1]:
-                    for i in range(len(data.points)-2, 0, -1):
-                        pt = data.points[i]
-                        print("...")
-                        ArduinoSerial.write(struct.pack(">BB", pt[0]+data.half, 
-                                                               pt[1]+data.half))
-                        time.sleep(data.delay)
+            print("done")
         except:
             print("Could not find connection to Arduino. Please try again.")
     else:
