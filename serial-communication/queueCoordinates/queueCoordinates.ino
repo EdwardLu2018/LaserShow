@@ -1,7 +1,7 @@
 #include <Servo.h>
 #include <math.h>
-#include <Coordinate.h>
-#include <QueueArray.h>
+#include "Coordinate.h"
+#include "QueueArray.h"
 
 Servo xservo; // xaxis
 Servo yservo; // yaxis
@@ -20,7 +20,7 @@ void setup () {
   Serial.begin(9600);
   Serial.println("Starting...");
   coorQueue.setPrinter(Serial);
-  
+
   xservo.attach(9);
   yservo.attach(10);
 }
