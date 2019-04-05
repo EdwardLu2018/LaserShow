@@ -6,14 +6,14 @@
 class Coordinate {
   public:
     Coordinate(int x, int y);
+    ~Coordinate();
     int x;
     int y;
 };
 
-Coordinate::Coordinate(int newX, int newY)
-{
-	x = newX;
-	x = newY;
+Coordinate::Coordinate(int newX, int newY) {
+    x = newX;
+    x = newY;
 }
 
 #endif
