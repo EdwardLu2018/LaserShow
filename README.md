@@ -1,5 +1,5 @@
 # Laser Light Show
-Formerly a project with Joe Muskin and Prof. Arend van der Zande at the University of Illinois at Urbana–Champaign for engineering outreach <br>
+Formerly a project with Joe Muskin and Prof. Arend van der Zande at the University of Illinois at Urbana–Champaign for engineering outreach. <br>
 Currently revived as a passion project.
 
 ## Examples
