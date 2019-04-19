@@ -1,5 +1,5 @@
 # Drawing Coordinates
-Traces coordinates located in a hex (.h) file containing an array of points
+Traces coordinates located in a header (.h) file containing an array of points
 
 ## Template for a blank file
 ![template](../images/template.png)
