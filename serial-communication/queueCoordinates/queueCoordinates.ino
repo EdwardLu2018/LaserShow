@@ -6,12 +6,12 @@
 Servo xservo; // xaxis
 Servo yservo; // yaxis
 
-int x0 = 95;
-int y0 = 92;
+int x0 = 90;
+int y0 = 90;
 
 QueueArray <Coordinate> coorQueue;
 
-uint32_t incomingPts[2];
+uint16_t incomingPts[2];
 
 int xsign = -1;
 int ysign = -1;
@@ -20,7 +20,7 @@ bool allDataReceived = false;
 
 void setup () {
   Serial.begin(9600);
-  Serial.println("Starting...");
+//  Serial.println("Starting...");
   coorQueue.setPrinter(Serial);
 
   xservo.attach(9);
@@ -31,9 +31,9 @@ void loop () {
   while (Serial.available() >= 2) {
     Coordinate coordinate(0, 0);
     for (int i = 0; i < 2; i++) {
-        incomingPts[i] = Serial.read() - 11;
+      incomingPts[i] = Serial.read() - 11;
     }
-    if (incomingPts[0] != 99 && incomingPts[1] != 99) {
+    if (incomingPts[0] != 244 && incomingPts[1] != 244) {
       coordinate.x = incomingPts[0] + x0;
       coordinate.y = incomingPts[1] + y0;
       coorQueue.enqueue(coordinate);
@@ -45,12 +45,15 @@ void loop () {
 
   if (allDataReceived) {
     Coordinate currCoor = coorQueue.dequeue();
-    moveServo(xservo, 1000, currCoor.x);
-    moveServo(yservo, 1000, currCoor.y);
+    xservo.write(currCoor.x);
+    yservo.write(currCoor.y);
+//    moveServo(xservo, 1000, currCoor.x);
+//    moveServo(yservo, 1000, currCoor.y);
     Serial.print(currCoor.x);
     Serial.print(",");
     Serial.println(currCoor.y);
     coorQueue.enqueue(currCoor);
+    delay(250);
   }
 }
 

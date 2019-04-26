@@ -3,7 +3,7 @@
 #include "batman.h"
 
 Servo xservo;  // xaxis servo object
-Servo yservo;  // yaxis servo object
+Servo yservo;  // ya xis servo object
  
 int time = 75;
 

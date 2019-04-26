@@ -11,7 +11,7 @@ def init(data):
     data.half = data.rows//2
     data.cellSize = data.width//data.rows
     data.removedPts = []
-    data.port = "/dev/cu.usbmodem1421"
+    data.port = "/dev/cu.usbmodem1411"
     data.baudRate = 9600
     data.isSendingData = False
     data.delay = 0.2 # seconds
@@ -26,7 +26,7 @@ def mousePressed(event, data):
                    round(x)-data.half != data.half and \
                    data.half-round(y) != data.half:
                         data.removedPts = []
-                        data.points += [[round(x)-data.half, 
+                        data.points += [[round(x)-data.half,
                                          data.half-round(y)]]
     removeUnneedPts(data)
 
@@ -85,15 +85,15 @@ def sendDataPoints(data):
             while False == False:
                 for i in range(len(data.points)):
                     pt = data.points[i]
-                    print("...")
-                    ArduinoSerial.write(struct.pack(">BB", pt[0]+data.half, 
+                    print(pt)
+                    ArduinoSerial.write(struct.pack(">BB", pt[0]+data.half,
                                                            pt[1]+data.half))
                     time.sleep(data.delay)
                 if len(data.points) >= 2 and data.points[0] != data.points[-1]:
                     for i in range(len(data.points)-2, 0, -1):
                         pt = data.points[i]
-                        print("...")
-                        ArduinoSerial.write(struct.pack(">BB", pt[0]+data.half, 
+                        print(pt)
+                        ArduinoSerial.write(struct.pack(">BB", pt[0]+data.half,
                                                                pt[1]+data.half))
                         time.sleep(data.delay)
         except:
@@ -106,30 +106,30 @@ def redrawAll(canvas, data):
         for c in range(data.cols):
             left = c*data.cellSize
             right = r*data.cellSize
-            canvas.create_rectangle((left, right), 
+            canvas.create_rectangle((left, right),
                                     (left+data.cellSize, right+data.cellSize))
-    canvas.create_line((data.half*data.cellSize, 0), 
-                       (data.half*data.cellSize, data.height-5), 
+    canvas.create_line((data.half*data.cellSize, 0),
+                       (data.half*data.cellSize, data.height-5),
                        width=3, arrow=BOTH)
-    canvas.create_line((0, data.half*data.cellSize), 
+    canvas.create_line((0, data.half*data.cellSize),
                        (data.width-5, data.half*data.cellSize),
                        width=3, arrow=BOTH)
 
     for pt in data.points:
         radius = 3
-        canvas.create_oval(((pt[0]+data.half)*data.cellSize-radius, 
-                            -(pt[1]-data.half)*data.cellSize-radius), 
-                           ((pt[0]+data.half)*data.cellSize+radius, 
+        canvas.create_oval(((pt[0]+data.half)*data.cellSize-radius,
+                            -(pt[1]-data.half)*data.cellSize-radius),
+                           ((pt[0]+data.half)*data.cellSize+radius,
                             -(pt[1]-data.half)*data.cellSize+radius),
                            fill="black")
 
     for i in range(len(data.points)-1):
         firstPt = data.points[i]
         secondPt = data.points[i+1]
-        canvas.create_line(((firstPt[0]+data.half)*data.cellSize, 
-                            -(firstPt[1]-data.half)*data.cellSize), 
-                           ((secondPt[0]+data.half)*data.cellSize, 
-                            -(secondPt[1]-data.half)*data.cellSize), 
+        canvas.create_line(((firstPt[0]+data.half)*data.cellSize,
+                            -(firstPt[1]-data.half)*data.cellSize),
+                           ((secondPt[0]+data.half)*data.cellSize,
+                            -(secondPt[1]-data.half)*data.cellSize),
                            width=3, fill="green yellow", arrow=LAST)
 
 ################################################################################
@@ -159,7 +159,7 @@ def run(width=300, height=300):
     root = Tk()
     root.resizable(width=False, height=False) # prevents resizing window
     root.title("Laser Light Show")
-    
+
     init(data)
     # create the canvas
     canvas = Canvas(root, width=data.width, height=data.height)

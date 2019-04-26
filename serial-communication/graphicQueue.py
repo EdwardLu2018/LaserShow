@@ -1,4 +1,4 @@
-from tkinter import *
+import tkinter as tk
 import time
 import serial
 import struct
@@ -82,7 +82,7 @@ def sendDataPoints(data):
             time.sleep(1)
             print("Serial communication established!")
             print("Sending inputs to Arduino")
-            for i in range(len(data.points)-1):
+            for i in range(len(data.points)):
                 pt = data.points[i]
                 print(pt)
                 ArduinoSerial.write(struct.pack(">BB", pt[0]+data.half,
@@ -96,7 +96,9 @@ def sendDataPoints(data):
                                                            pt[1]+data.half))
                     time.sleep(data.delay)
             ArduinoSerial.write(struct.pack(">BB", 255, 255))
-            print("done")
+            while 1:
+                print(ArduinoSerial.readline())
+            print("Serial communication ended")
         except:
             print("Could not find connection to Arduino. Please try again.")
     else:
@@ -111,10 +113,10 @@ def redrawAll(canvas, data):
                                     (left+data.cellSize, right+data.cellSize))
     canvas.create_line((data.half*data.cellSize, 0),
                        (data.half*data.cellSize, data.height-5),
-                       width=3, arrow=BOTH)
+                       width=3, arrow=tk.BOTH)
     canvas.create_line((0, data.half*data.cellSize),
                        (data.width-5, data.half*data.cellSize),
-                       width=3, arrow=BOTH)
+                       width=3, arrow=tk.BOTH)
 
     for pt in data.points:
         radius = 3
@@ -131,13 +133,13 @@ def redrawAll(canvas, data):
                             -(firstPt[1]-data.half)*data.cellSize),
                            ((secondPt[0]+data.half)*data.cellSize,
                             -(secondPt[1]-data.half)*data.cellSize),
-                           width=3, fill="green yellow", arrow=LAST)
+                           width=3, fill="green yellow", arrow=tk.LAST)
 
 ################################################################################
 
 def run(width=300, height=300):
     def redrawAllWrapper(canvas, data):
-        canvas.delete(ALL)
+        canvas.delete(tk.ALL)
         canvas.create_rectangle(0, 0, data.width, data.height,
                                 fill='white', width=0)
         redrawAll(canvas, data)
@@ -157,15 +159,15 @@ def run(width=300, height=300):
     data.width = width
     data.height = height
     # create the root
-    root = Tk()
+    root = tk.Tk()
     root.resizable(width=False, height=False) # prevents resizing window
     root.title("Laser Light Show")
 
     init(data)
     # create the canvas
-    canvas = Canvas(root, width=data.width, height=data.height)
+    canvas = tk.Canvas(root, width=data.width, height=data.height)
     canvas.configure(bd=0, highlightthickness=0)
-    canvas.pack(side=TOP, padx=5, pady=5)
+    canvas.pack(side=tk.TOP, padx=5, pady=5)
     # set up events
     root.bind("<Button-1>", lambda event:
                             mousePressedWrapper(event, canvas, data))

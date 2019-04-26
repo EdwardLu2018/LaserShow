@@ -15,6 +15,7 @@ void loop() {
   }
 
   if (data == '2') {
+    Serial.println(int(data));
     digitalWrite (LED_BUILTIN, HIGH);
     delay(500);
     digitalWrite (LED_BUILTIN, LOW);

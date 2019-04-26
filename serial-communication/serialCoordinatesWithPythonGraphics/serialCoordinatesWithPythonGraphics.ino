@@ -1,7 +1,7 @@
 #include <Servo.h>
 #include <math.h>
 
-int incomingPts[2];
+uint16_t incomingPts[2];
 
 Servo xservo; // xaxis
 Servo yservo; // yaxis
@@ -26,15 +26,10 @@ void setup () {
 void loop () {
   while (Serial.available() >= 2) {
     for (int i = 0; i < 2; i++) {
-      if (i == 0) {
-        incomingPts[i] = Serial.read() - 11;
-        xpos = xsign * incomingPts[i] + x0;
-      }
-      else {
-        incomingPts[i] = Serial.read() - 11;
-        ypos = ysign * incomingPts[i] + y0;
-      }
+      incomingPts[i] = Serial.read() - 11;
     }
+    xpos = xsign * incomingPts[0] + x0;
+    ypos = ysign * incomingPts[1] + y0;
     xservo.write(xpos);
     yservo.write(ypos);
   }
