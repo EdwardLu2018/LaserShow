@@ -1,7 +1,7 @@
 #include <Servo.h>
 #include <math.h>
-#include "Coordinate.h"
-#include "QueueArray.h"
+#include "lib/Coordinate.h"
+#include "lib/QueueArray.h"
 
 Servo xservo; // xaxis
 Servo yservo; // yaxis
@@ -49,12 +49,16 @@ void loop () {
     yservo.write(currCoor.y);
 //    moveServo(xservo, 1000, currCoor.x);
 //    moveServo(yservo, 1000, currCoor.y);
-    Serial.print(currCoor.x);
-    Serial.print(",");
-    Serial.println(currCoor.y);
+    printCoor(currCoor);
     coorQueue.enqueue(currCoor);
     delay(250);
   }
+}
+
+void printCoor(Coordinate coor) {
+  Serial.print(coor.x);
+  Serial.print(",");
+  Serial.println(coor.y);
 }
 
 void moveServo(Servo ser, int milli, int pos) {
