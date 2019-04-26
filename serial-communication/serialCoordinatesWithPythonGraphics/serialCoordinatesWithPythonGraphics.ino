@@ -1,7 +1,4 @@
 #include <Servo.h>
-#include <math.h>
-
-uint16_t incomingPts[2];
 
 Servo xservo; // xaxis
 Servo yservo; // yaxis
@@ -14,6 +11,8 @@ int ypos;
 
 int xsign = -1;
 int ysign = -1;
+
+uint16_t incomingPts[2];
 
 void setup () {
   Serial.begin(9600);

@@ -1,22 +1,18 @@
 #include <Servo.h>
-#include <math.h>
 #include "lib/Coordinate.h"
 #include "lib/QueueArray.h"
 
 Servo xservo; // xaxis
 Servo yservo; // yaxis
 
-int x0 = 90;
-int y0 = 90;
+int Coordinate::xsign = 1;
+int Coordinate::ysign = 1;
+int Coordinate::x0 = 90;
+int Coordinate::y0 = 90;
 
 QueueArray <Coordinate> coorQueue;
-
-uint16_t incomingPts[2];
-
-int xsign = -1;
-int ysign = -1;
-
 bool allDataReceived = false;
+uint16_t incomingPts[2];
 
 void setup () {
   Serial.begin(9600);
@@ -29,14 +25,12 @@ void setup () {
 
 void loop () {
   while (Serial.available() >= 2) {
-    Coordinate coordinate(0, 0);
     for (int i = 0; i < 2; i++) {
       incomingPts[i] = Serial.read() - 11;
     }
     if (incomingPts[0] != 244 && incomingPts[1] != 244) {
-      coordinate.x = incomingPts[0] + x0;
-      coordinate.y = incomingPts[1] + y0;
-      coorQueue.enqueue(coordinate);
+      Coordinate newCoor(incomingPts[0], incomingPts[1]);
+      coorQueue.enqueue(newCoor);
     }
     else {
       allDataReceived = true;
@@ -45,11 +39,14 @@ void loop () {
 
   if (allDataReceived) {
     Coordinate currCoor = coorQueue.dequeue();
+    
     xservo.write(currCoor.x);
     yservo.write(currCoor.y);
 //    moveServo(xservo, 1000, currCoor.x);
 //    moveServo(yservo, 1000, currCoor.y);
+
     printCoor(currCoor);
+    
     coorQueue.enqueue(currCoor);
     delay(250);
   }
