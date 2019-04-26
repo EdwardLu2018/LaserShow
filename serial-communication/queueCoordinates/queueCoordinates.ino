@@ -5,10 +5,10 @@
 Servo xservo; // xaxis
 Servo yservo; // yaxis
 
-int Coordinate::xsign = 1;
-int Coordinate::ysign = 1;
-int Coordinate::x0 = 90;
-int Coordinate::y0 = 90;
+byte Coordinate::xsign = 1;
+byte Coordinate::ysign = 1;
+byte Coordinate::x0 = 90;
+byte Coordinate::y0 = 90;
 
 QueueArray <Coordinate> coorQueue;
 bool allDataReceived = false;

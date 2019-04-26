@@ -5,8 +5,8 @@
 
 class Coordinate {
   public:
-    static int xsign, ysign;
-    static int x0, y0;
+    static byte xsign, ysign;
+    static byte x0, y0;
 
     int x, y;
     Coordinate(int x, int y);
