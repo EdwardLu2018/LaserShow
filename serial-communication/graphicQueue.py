@@ -11,7 +11,7 @@ def init(data):
     data.half = data.rows//2
     data.cellSize = data.width//data.rows
     data.removedPts = []
-    data.port = "/dev/cu.usbmodem1421"
+    data.port = "/dev/cu.usbmodem1411"
     data.baudRate = 9600
     data.isSendingData = False
     data.delay = 0.5 # seconds

@@ -45,11 +45,19 @@ void loop () {
 
   if (allDataReceived) {
     Coordinate currCoor = coorQueue.dequeue();
-  //  xservo.write(currCoor.x);
-  //  yservo.write(currCoor.y);
+    moveServo(xservo, 1000, currCoor.x);
+    moveServo(yservo, 1000, currCoor.y);
     Serial.print(currCoor.x);
     Serial.print(",");
     Serial.println(currCoor.y);
     coorQueue.enqueue(currCoor);
+  }
+}
+
+void moveServo(Servo ser, int milli, int pos) {
+  double time = (double)milli / pos * 1000;
+  for(int i = 0; i < pos; i++) {
+    ser.write(i);
+    delayMicroseconds(time);
   }
 }
